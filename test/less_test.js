@@ -151,6 +151,14 @@ exports.less = {
 
     test.done();
   },
+  sourceMapMultpleFiles: function(test) {
+    test.expect(1);
+
+    var sourceMap = grunt.file.readJSON('tmp/sourceMapBasepath.css.map');
+    test.equal(sourceMap.sources.length, 2, 'should have 2 sources referenced in the map.');
+
+    test.done();
+  },
   customFunctions: function(test) {
     test.expect(1);
 

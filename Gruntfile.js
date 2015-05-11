@@ -194,6 +194,18 @@ module.exports = function(grunt) {
         src: 'test/fixtures/style3.less',
         dest: 'tmp/sourceMapLessInline.css'
       },
+      sourceMapsMultipleFiles: {
+        options: {
+          sourceMap: true,
+          sourceMapFilename: 'tmp/sourceMapMultipleFiles.css.map',
+        },
+        files: {
+          'tmp/sourceMapMultipleFiles.css': [
+            'test/fixtures/style3.less',
+            'test/fixtures/style4.less'
+          ]
+        }
+      },
       testCustomFunctions: {
         options: {
           customFunctions: {

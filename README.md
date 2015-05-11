@@ -5,7 +5,7 @@
 
 
 ## Getting Started
-This plugin requires Grunt `~0.4.5`
+This plugin requires Grunt `>=0.4.0`
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
@@ -145,12 +145,6 @@ Default: none
 
 Adds this path onto the less file paths in the source map.
 
-#### sourceMapFileInline
-Type: `Boolean`  
-Default: false
-
-Puts the map (and any less files) as a base64 data uri into the output css file.      .
-
 #### outputSourceFiles
 Type: `Boolean`  
 Default: false
@@ -183,8 +177,8 @@ less: {
     options: {
       paths: ["assets/css"],
       plugins: [
-        new (require('less-plugin-autoprefix'))({browsers: ["last 2 versions"]}),
-        new (require('less-plugin-clean-css'))(cleanCssOptions)
+        new require('less-plugin-autoprefix')({browsers: ["last 2 versions"]}),
+        new require('less-plugin-clean-css')(cleanCssOptions)
       ],
       modifyVars: {
         imgPath: '"http://mycdn.com/path/to/images"',
@@ -235,4 +229,4 @@ less: {
 
 Task submitted by [Tyler Kellen](http://goingslowly.com/)
 
-*This file was generated on Tue Dec 23 2014 14:52:06.*
+*This file was generated on Mon May 11 2015 17:08:18.*
