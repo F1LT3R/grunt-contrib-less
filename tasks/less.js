@@ -53,7 +53,9 @@ module.exports = function(grunt) {
       }
 
       var compiled = [];
+      var sourceMap = null;
       var i = 0;
+
 
       async.concatSeries(files, function(file, next) {
         if (i++ > 0) {
@@ -62,6 +64,17 @@ module.exports = function(grunt) {
 
         compileLess(file, destFile, options)
           .then(function(output) {
+
+            console.log('____ SOURCEMAP _____\n');
+            console.log(output.map);
+            console.log('\n');
+
+            if (!sourceMap) {
+              sourceMap = output.map;
+            } else {
+              sourceMap = _.merge(sourceMap, output.map);
+            }
+            // _.merge(true, sourceMap, JSON.parse(output.map));
             compiled.push(output.css);
             if (options.sourceMap && !options.sourceMapFileInline) {
               var sourceMapFilename = options.sourceMapFilename;
@@ -82,7 +95,15 @@ module.exports = function(grunt) {
           grunt.log.warn('Destination ' + chalk.cyan(destFile) + ' not written because compiled files were empty.');
         } else {
           var allCss = compiled.join(options.compress ? '' : grunt.util.normalizelf(grunt.util.linefeed));
+          // var allSourceMap = compiledSourceMap.join(options.compress ? '' : grunt.util.normalizelf(grunt.util.linefeed));
+
+          console.log('____ MERGED SOURCEMAP _____\n');
+          console.log(sourceMap);
+          console.log('\n');
+
           grunt.file.write(destFile, allCss);
+          // grunt.file.write(options.sourceMapFilename, allSourceMap);
+          // grunt.file.write(destFile, allCss);
           grunt.verbose.writeln('File ' + chalk.cyan(destFile) + ' created');
           tally.sheets++;
         }
